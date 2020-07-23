@@ -1,4 +1,5 @@
-# Write your code below game_hash
+require 'pry'
+
 def game_hash
   {
     home: {
@@ -126,4 +127,85 @@ def game_hash
   }
 end
 
-# Write code here
+def num_points_scored(player) 
+  data = game_hash
+  data.each do |(side, team_info)|
+    player_list = team_info[:players]
+    player_list.each do |player_profile| 
+      if player_profile[:player_name] == player
+          return player_profile[:points]
+      end 
+    end 
+  end
+end 
+
+def shoe_size(player)
+  data = game_hash
+  data.each do |(side, team_info)|
+    player_list = team_info[:players]
+    player_list.each do |player_profile| 
+      if player_profile[:player_name] == player
+          return player_profile[:shoe]
+      end 
+    end 
+  end
+end 
+
+def team_colors(team)
+  data = game_hash
+  data.each do |side, team_info|
+    if team_info[:team_name] == team 
+      return team_info[:colors]
+    end 
+  end 
+end 
+
+def team_names
+  data = game_hash
+  teams = []
+  data.each do |side, team_info|
+    teams.append(team_info[:team_name])
+  end 
+  teams 
+end 
+
+def player_numbers(team)
+  data = game_hash
+  numbers = []
+  data.each do |(side, team_info)|
+    player_list = team_info[:players]
+    player_list.each do |player_profile|
+      if team_info[:team_name] == team 
+        numbers.append(player_profile[:number])
+      end 
+    end 
+  end 
+  numbers 
+end
+
+def player_stats(player)
+  data = game_hash
+  data.each do |(side, team_info)|
+    player_list = team_info[:players]
+    player_list.each do |player_profile| 
+      if player_profile[:player_name] == player
+          return player_profile
+      end
+    end 
+  end 
+end 
+
+def big_shoe_rebounds
+  data = game_hash
+  biggest_shoe = [0,0] 
+  data.each do |(side, team_info)|
+    player_list = team_info[:players]
+    player_list.each do |player_profile| 
+      if player_profile[:shoe] > biggest_shoe[0]
+        biggest_shoe[0] = player_profile[:shoe]
+        biggest_shoe[1] = player_profile[:rebounds]
+      end
+    end 
+  end 
+  biggest_shoe[1]
+end 
